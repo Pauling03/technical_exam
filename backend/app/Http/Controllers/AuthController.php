@@ -13,12 +13,14 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name'     => 'required|string|max:255',
+            'username'     => 'required|string|max:255',
             'email'    => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $user = User::create([
             'name'     => $validated['name'],
+            'username'    => $validated['username'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
@@ -48,7 +50,7 @@ class AuthController extends Controller
         if (!Auth::attempt($validated)) {
             return response()->json([
                 'message' => 'The provided credentials are incorrect.',
-            ], 401); // Explicitly set 401 status code
+            ], 401); 
         }
 
         $user  = Auth::user();

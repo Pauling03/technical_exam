@@ -17,6 +17,7 @@ class AuthControllerTest extends TestCase
         // Payload for registration
         $registrationData = [
             'name'                  => 'Test User',
+            'username'                 => 'testusername',
             'email'                 => 'test@example.com',
             'password'              => 'password123',
             'password_confirmation' => 'password123',
@@ -46,6 +47,7 @@ class AuthControllerTest extends TestCase
         // Send POST request with invalid data
         $response = $this->postJson('/api/register', [
             'name'                  => '',
+            'username'                 => 'testusername',
             'email'                 => 'not-an-email',
             'password'              => 'short',
             'password_confirmation' => 'not-matching',
@@ -75,7 +77,7 @@ class AuthControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'user' => [
-                    'id', 'name', 'email',
+                    'id', 'name','username', 'email',
                 ],
                 'access_token',
             ]);
@@ -118,6 +120,7 @@ class AuthControllerTest extends TestCase
             ->assertJson([
                 'id'    => $user->id,
                 'name'  => $user->name,
+                'username'  => $user->username,
                 'email' => $user->email,
             ]);
     }
