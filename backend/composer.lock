@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f60f8b6e279e6de64f92f6b9fb420141",
+    "content-hash": "1a3912991f0bb1e78d350b5ae5820498",
     "packages": [
         {
             "name": "brick/math",
@@ -3362,6 +3362,59 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "rspr/laravel-starter",
+            "version": "11.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dannyJack/package-rspr-laravel-starter.git",
+                "reference": "f16a5665d987bf333d87698b36add56534f03a2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dannyJack/package-rspr-laravel-starter/zipball/f16a5665d987bf333d87698b36add56534f03a2f",
+                "reference": "f16a5665d987bf333d87698b36add56534f03a2f",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RSPR\\LaravelStarter\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helpers/GlobalHelper/rspr.php",
+                    "src/Helpers/GlobalHelper/RSPRLog.php",
+                    "src/Helpers/GlobalHelper/RSPRL0g.php",
+                    "src/Helpers/GlobalHelper/RSPRSlackLog.php"
+                ],
+                "psr-4": {
+                    "RSPR\\LaravelStarter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Cisneros",
+                    "email": "work.dcisneros@gmail.com"
+                }
+            ],
+            "description": "Laravel Starter Pack",
+            "support": {
+                "issues": "https://github.com/dannyJack/package-rspr-laravel-starter/issues",
+                "source": "https://github.com/dannyJack/package-rspr-laravel-starter/tree/11.0.9"
+            },
+            "time": "2024-12-23T06:09:11+00:00"
         },
         {
             "name": "symfony/clock",
