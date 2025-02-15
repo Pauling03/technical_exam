@@ -48,6 +48,10 @@ php artisan db:seed --class=ProductSeeder
 # Start the development server
 php artisan serve
 
+
+# Run Migration in Test Database
+php artisan migrate --env=testing
+
 # Run Unit Test
 php artisan test
 
