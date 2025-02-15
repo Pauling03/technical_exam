@@ -31,7 +31,7 @@ cd backend
 composer install or composer i
 
 # Copy .env.example to .env
-cp .env.example .env
+run copy .env.example .env in cmd or manually copy the .env.example to .env
 
 # Open Xampp
  start Apache and MySQL
@@ -42,8 +42,14 @@ php artisan key:generate
 # Run migrations and seed a user into the database
 php artisan migrate --seed
 
+# Run this to seed the products
+php artisan db:seed --class=ProductSeeder
+
 # Start the development server
 php artisan serve
+
+# Run Unit Test
+php artisan test
 
 # The credential can be use to log into the system:
     email : paul@gmail.com
