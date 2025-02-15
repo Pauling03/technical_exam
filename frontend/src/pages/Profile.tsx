@@ -62,11 +62,13 @@ const Profile = () => {
   return (
     <>
       <Header />
-      <div className="p-6 bg-white shadow-md rounded-lg">
+      <div className="mx-auto p-6 m-7 bg-white shadow-md rounded-lg max-w-2xl w-full">
         <h2 className="text-2xl font-semibold mb-4">Profile</h2>
 
         {loading ? (
-          <CircularProgress size={120} className="mx-auto block" />
+          <div className="flex justify-center items-center h-40">
+            <CircularProgress size={120} />
+          </div>
         ) : user ? (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
