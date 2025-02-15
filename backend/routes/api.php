@@ -15,7 +15,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 });
 
-// User Route
+// User Routes
 Route::apiResource('users', UserController::class);
 
 Route::post('/register', [AuthController::class, 'register']);
