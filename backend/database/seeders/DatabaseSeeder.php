@@ -2,7 +2,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,13 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Paul Henry',
+        // Create a user
+        $user = User::factory()->create([
+            'name'     => 'Paul Henry',
             'username' => 'Paully',
-            'email' => 'paul@gmail.com',
-            'password' => 'password',
+            'email'    => 'paul@gmail.com',
+            'password' => bcrypt('password'), 
+        ]);
+
+        // Create 5 products for the user
+        Product::factory(5)->create([
+            'user_id' => $user->id, 
         ]);
     }
 }
