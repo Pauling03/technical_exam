@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import App from "./App";
 import Product from "./pages/Product";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: "/products",
             element: <Product />,
+          },
+          {
+            path: "/profile",
+            element: <Profile />,
           },
         ],
       },

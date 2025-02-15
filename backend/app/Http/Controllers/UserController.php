@@ -20,26 +20,6 @@ class UserController extends Controller
         return response()->json($response);
     }
 
-    public function store(UserStoreUpdateRequest $request)
-    {
-        // Retrieve the validated data
-        $validated = $request->validated();
-
-        // Hash the password
-        $validated['password'] = bcrypt($validated['password']);
-
-        // Create the user
-        $user = User::create($validated);
-
-        // Automatically log the user in (if needed)
-        // Auth::login($user);
-
-        // Return a success response
-        return response()->json([
-            'message' => 'User registered successfully',
-            'data'    => $user,
-        ], 201);
-    }
 
     public function update(User $user, UserStoreUpdateRequest $request)
     {
@@ -57,7 +37,7 @@ class UserController extends Controller
         // Return a JSON response
         return response()->json([
             'message' => 'User updated successfully',
-            'data'    => $user,
+            'user'    => $user,
         ], 200);
     }
 

@@ -25,7 +25,7 @@ class UserStoreUpdateRequest extends FormRequest
                 'max:255',
                 'unique:users,email,' . $userId, 
             ],
-            'password' => $this->isMethod('POST') ? 'required|string|min:8' : 'nullable|string|min:8',
+            'password' => $this->isMethod('POST') ? 'required|string|min:8|confirmed' : 'required|string|min:8|confirmed',
         ];
     }
 }
