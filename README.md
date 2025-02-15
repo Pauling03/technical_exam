@@ -33,6 +33,9 @@ composer install or composer i
 # Copy .env.example to .env
 cp .env.example .env
 
+# Open Xampp
+ start Apache and MySQL
+
 # Generate the application key
 php artisan key:generate
 
@@ -54,4 +57,9 @@ cd frontend
 # Install dependencies
 npm install or npm i
 
-# 
+# Start the development server:
+npm run dev
+
+### CREDENTIALS MAY USE IN TESTING ###
+ email: paul@gmail.com
+ password: password
