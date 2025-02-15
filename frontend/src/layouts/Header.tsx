@@ -92,7 +92,7 @@ function Header() {
               }`}
             >
               <User size={18} />
-              <span className="font-medium">{user.name}</span>
+              <span className="font-medium">{user.username}</span>
             </Link>
           )}
 

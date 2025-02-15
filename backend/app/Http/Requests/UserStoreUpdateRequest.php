@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -18,13 +17,14 @@ class UserStoreUpdateRequest extends FormRequest
         $userId = $this->route('user')?->id;
 
         return [
-            'name' => 'required|string|max:255',
-            'email' => [
+            'name'     => 'required|string|max:255',
+            'email'    => [
                 'required',
                 'email',
                 'max:255',
-                'unique:users,email,' . $userId, 
+                'unique:users,email,' . $userId,
             ],
+            'username' => 'required',
             'password' => $this->isMethod('POST') ? 'required|string|min:8|confirmed' : 'required|string|min:8|confirmed',
         ];
     }
