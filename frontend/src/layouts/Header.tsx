@@ -1,8 +1,27 @@
 import { LogOut, Menu } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom"; // ✅ Import useNavigate
+import { toast } from "react-toastify";
+import { api } from "../services/apiService";
+
+const logout = async (navigate: any) => {
+  try {
+    await api.post("/api/logout"); // Call Laravel API to revoke token
+  } catch (error: any) {
+    console.error("Logout failed:", error);
+    toast.error("Failed to log out. Please try again.");
+  }
+
+  // Clear local storage regardless of API response
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  toast.success("Logged out successfully!");
+  navigate("/login", { replace: true }); // Redirect to login page
+};
 
 function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <div className="border-b-1 border-b-gray-300 shadow">
@@ -25,7 +44,7 @@ function Header() {
         <ul className="hidden sm:flex gap-6 items-center">
           <Link
             to="/home"
-            className={`p-[3px] px-2 rounded hover:bg-primaryHover hover:text-white cursor-pointer ${
+            className={`p-[3px] px-2 rounded hover:bg-primary hover:text-white cursor-pointer ${
               location.pathname === "/home"
                 ? "bg-primary hover:bg-primaryHover text-white"
                 : ""
@@ -46,7 +65,10 @@ function Header() {
           </Link>
 
           <li className="p-[3px] px-2 rounded hover:bg-primary text-red-500 hover:text-white cursor-pointer">
-            <button className="flex items-center gap-2 cursor-pointer">
+            <button
+              onClick={() => logout(navigate)} // ✅ Pass navigate function
+              className="flex items-center gap-2 cursor-pointer"
+            >
               <LogOut size={18} />
               <span className="hidden md:flex">Logout</span>
             </button>

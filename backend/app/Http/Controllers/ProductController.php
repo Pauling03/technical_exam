@@ -9,9 +9,25 @@ class ProductController extends Controller
     // List all products
     public function index()
     {
-        $products = auth()->user()->products;
+        $limit  = request()->input('limit', 10);
+        $search = request()->input('search', '');
 
-        return response()->json($products);
+        $query = auth()->user()->products();
+
+        if (! empty($search)) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+        }
+
+        $products = $query->paginate($limit);
+
+        return response()->json([
+            'data'         => $products->items(),
+            'total'        => $products->total(),
+            'per_page'     => $products->perPage(),
+            'current_page' => $products->currentPage(),
+            'last_page'    => $products->lastPage(),
+        ]);
     }
 
     // Add a new product

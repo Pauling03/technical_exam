@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api, setAuthToken } from "../services/apiService";
 import { toast } from "react-toastify";
@@ -10,20 +10,31 @@ const Login = () => {
     password: "",
   });
 
+  // 🔥 Redirect authenticated users away from login page
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      const response = await api.post("/api/login", values); // Ensure correct endpoint
+      const response = await api.post("/api/login", values);
       if (response.data && response.data.access_token) {
         const token = response.data.access_token;
+        const user = response.data.user; // Extract user details
 
         toast.success("Login successful!");
-        console.log("Token received:", token);
+        console.log("User received:", user);
 
         setAuthToken(token);
-        localStorage.setItem("user", JSON.stringify(response.data.user)); // Store user data
-        await navigate("/home");
+        localStorage.setItem("token", token); // Store token
+        localStorage.setItem("user", JSON.stringify(user)); // Store user data
+
+        navigate("/home", { replace: true }); // Redirect after successful login
       } else {
         toast.error("Invalid response from server.");
       }

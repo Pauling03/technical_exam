@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api, setAuthToken } from "../services/apiService";
@@ -13,6 +13,14 @@ const Register = () => {
     password: "",
   });
 
+  // 🔥 Redirect authenticated users away from login page
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     try {
@@ -20,11 +28,10 @@ const Register = () => {
       toast.success("Registration successful!");
       setAuthToken(response.data.data.token);
       navigate("/home");
-    } catch (err: any) {  
+    } catch (err: any) {
       toast.error(err.response?.data?.message || "An error occurred");
     }
   };
-
 
   return (
     <div className="h-screen">

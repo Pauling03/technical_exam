@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import App from "./App";
 import Product from "./pages/Product";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -23,12 +24,17 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/home",
-        element: <Home />,
-      },
-      {
-        path: "/products",
-        element: <Product />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "/home",
+            element: <Home />,
+          },
+          {
+            path: "/products",
+            element: <Product />,
+          },
+        ],
       },
     ],
   },

@@ -73,7 +73,7 @@ class ProductControllerTest extends TestCase
         $response->assertStatus(200);
 
         // Ensure only this user's products are returned
-        $this->assertCount(3, $response->json());
+        $this->assertCount(3, $response->json('data'));
     }
 
     #[Test]

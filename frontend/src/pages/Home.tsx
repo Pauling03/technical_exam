@@ -5,13 +5,10 @@ import { api } from "../services/apiService"; // Ensure correct path
 
 const getUser = async (setUser: (user: any) => void) => {
   try {
-    const response = await api.get("/api/user"); // Use GET request
-    toast.success("User details retrieved successfully!");
-
-    console.log(response);
-
-    setUser(response.data.data); // Update state
-    localStorage.setItem("user", JSON.stringify(response.data.data)); // Store user data
+    // Fetch fresh data from the backend
+    const response = await api.get("/api/user");    
+    setUser(response.data);
+    localStorage.setItem("user", JSON.stringify(response.data)); // Store fresh user data
   } catch (err: any) {
     toast.error(err.response?.data?.message || "Failed to fetch user details");
   }
